@@ -1,0 +1,69 @@
+# Unity-generated data
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+[Bb]uild/
+[Bb]uilds/
+[Ee]xportedObj/
+
+# IDE and editor state
+.vs/
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# Generated Visual Studio / Rider project files
+*.csproj
+*.sln
+*.slnx
+*.unityproj
+*.sln.docstates
+*.VC.db
+*.VC.VC.opendb
+
+# OS noise
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local presentation/build artifacts created outside Unity
+/.presentation-build/
+/presentation-output/
+
+# Third-party asset package contents are not mirrored in the public source repo.
+# Keep Unity .meta files so imported licensed copies retain their GUID references.
+/Assets/POLYGON city pack/
+!/Assets/POLYGON city pack/
+/Assets/POLYGON city pack/**
+!/Assets/POLYGON city pack/**/
+!/Assets/POLYGON city pack/**/*.meta
+/Assets/Pack_FREE_Cars/
+!/Assets/Pack_FREE_Cars/
+/Assets/Pack_FREE_Cars/**
+!/Assets/Pack_FREE_Cars/**/
+!/Assets/Pack_FREE_Cars/**/*.meta
+/Assets/Drone/
+!/Assets/Drone/
+/Assets/Drone/**
+!/Assets/Drone/**/
+!/Assets/Drone/**/*.meta
+/Assets/Game Assets/
+!/Assets/Game Assets/
+/Assets/Game Assets/**
+!/Assets/Game Assets/**/
+!/Assets/Game Assets/**/*.meta
+/Assets/drone.prefab
