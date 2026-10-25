@@ -3228,7 +3228,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1750995681132669210, guid: d5269780a046ec543b9256354669a4ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.63
+      value: 13.7197895
       objectReference: {fileID: 0}
     - target: {fileID: 1750995681132669210, guid: d5269780a046ec543b9256354669a4ee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5305,6 +5305,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1165740686982719177, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 726827978}
+    - targetCorrespondingSourceObject: {fileID: 1165740686982719177, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 726827979}
   m_SourcePrefab: {fileID: 100100000, guid: 9938a292ff15a9743ba9187c38b8366f, type: 3}
 --- !u!4 &726827976 stripped
 Transform:
@@ -5341,7 +5344,20 @@ MonoBehaviour:
   fuelConsumptionPerSecond: 0.5
   motorsOnAtStart: 1
   motorLoopClip: {fileID: 8300000, guid: 3c269e96dbb084743bc5ac34d2b2b847, type: 3}
-  propellerRotationSpeed: 1800
+--- !u!114 &726827979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 726827977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 719dff38c90647fcb1f284bd50533d7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BumbleBeePropellerSpin
+  rotationSpeed: 1800
+  flightController: {fileID: 0}
 --- !u!1001 &734877066
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8145,7 +8161,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1750995681132669210, guid: d5269780a046ec543b9256354669a4ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.17
+      value: 9.9166565
       objectReference: {fileID: 0}
     - target: {fileID: 1750995681132669210, guid: d5269780a046ec543b9256354669a4ee, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11963,7 +11979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1750995681132669210, guid: d5269780a046ec543b9256354669a4ee, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.51
+      value: 10.207427
       objectReference: {fileID: 0}
     - target: {fileID: 1750995681132669210, guid: d5269780a046ec543b9256354669a4ee, type: 3}
       propertyPath: m_LocalPosition.z
