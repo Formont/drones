@@ -459,8 +459,7 @@ public sealed class CampaignMapScene : MonoBehaviour
         Vector2[] positions =
         {
             new Vector2(0.58f, 0.68f),
-            new Vector2(0.64f, 0.48f),
-            new Vector2(0.55f, 0.34f)
+            new Vector2(0.64f, 0.48f)
         };
 
         CampaignMissionDefinition delivery = null;
@@ -473,7 +472,8 @@ public sealed class CampaignMapScene : MonoBehaviour
 
             Image halo = CreateImage("BubbleHalo", bubble, circleSprite, new Color(0.10f, 0.68f, 0.92f, 0.20f));
             halo.rectTransform.sizeDelta = new Vector2(74f, 74f);
-            int bestDifficulty = PlayerPrefs.GetInt("Mission2BestDifficulty", -1);
+            int missionNumber = i + 2;
+            int bestDifficulty = PlayerPrefs.GetInt($"Mission{missionNumber}BestDifficulty", -1);
             Color medal = bestDifficulty >= (int)GameDifficulty.Hard ? new Color(1f, 0.72f, 0.25f)
                 : bestDifficulty == (int)GameDifficulty.Normal ? new Color(0.78f, 0.86f, 0.94f)
                 : bestDifficulty == (int)GameDifficulty.Easy ? new Color(0.77f, 0.47f, 0.26f)
@@ -483,6 +483,7 @@ public sealed class CampaignMapScene : MonoBehaviour
             Image marker = CreateImage("Bubble", bubble, circleSprite, new Color(0.08f, 0.42f, 0.63f, 0.98f));
             marker.rectTransform.sizeDelta = new Vector2(56f, 56f);
 
+            bool fireMissionUnlocked = i == 1 && PlayerPrefs.GetInt("Mission2Completed", 0) == 1;
             if (i == 0)
             {
                 delivery = bubble.gameObject.AddComponent<CampaignMissionDefinition>();
@@ -505,6 +506,29 @@ public sealed class CampaignMapScene : MonoBehaviour
                 DrawBoxMissionIcon(marker.transform);
                 AddLabel(bubble, "MissionTag", "ПОСЫЛКА", new Vector2(-0.18f, -0.15f), new Vector2(1.18f, 0.12f), 9f, Color.white, TextAlignmentOptions.Center, true);
             }
+            else if (i == 1 && fireMissionUnlocked)
+            {
+                CampaignMissionDefinition fireMission = bubble.gameObject.AddComponent<CampaignMissionDefinition>();
+                fireMission.SetMissionContent(
+                    "Тушение над кварталом",
+                    "На крышах нескольких домов вспыхнул огонь. Используйте дрон BumbleBee с водяной пушкой и потушите три небольших очага. На лёгкой сложности таймера нет, на нормальной даётся 30 секунд, на сложной — 40 секунд. Столкновение или вылет за границы города завершит миссию.",
+                    GameSettingsService.Difficulty == GameDifficulty.Easy ? "Без ограничения времени"
+                        : GameSettingsService.Difficulty == GameDifficulty.Normal ? "30 секунд" : "40 секунд",
+                    "F-003", "ПОЖАР", "lvl3");
+                Button missionButton = marker.gameObject.AddComponent<Button>();
+                missionButton.targetGraphic = marker;
+                missionButton.transition = Selectable.Transition.ColorTint;
+                ColorBlock colors = missionButton.colors;
+                colors.normalColor = marker.color;
+                colors.highlightedColor = Color.Lerp(marker.color, Color.white, 0.18f);
+                colors.pressedColor = Color.Lerp(marker.color, Color.black, 0.15f);
+                missionButton.colors = colors;
+                missionButton.onClick.AddListener(() => SelectMission(fireMission));
+                marker.raycastTarget = true;
+                marker.gameObject.AddComponent<ButtonHoverEffect>();
+                DrawFireMissionIcon(marker.transform);
+                AddLabel(bubble, "MissionTag", "ПОЖАР", new Vector2(-0.18f, -0.15f), new Vector2(1.18f, 0.12f), 9f, Color.white, TextAlignmentOptions.Center, true);
+            }
             else
             {
                 marker.raycastTarget = false;
@@ -526,6 +550,19 @@ public sealed class CampaignMapScene : MonoBehaviour
         flap.rectTransform.anchoredPosition = new Vector2(0f, 13f);
         flap.rectTransform.sizeDelta = new Vector2(28f, 5f);
         flap.raycastTarget = false;
+    }
+
+    private void DrawFireMissionIcon(Transform parent)
+    {
+        Image outerFlame = CreateImage("FireIcon", parent, RoundedSprite(), new Color(1f, 0.56f, 0.16f));
+        outerFlame.rectTransform.sizeDelta = new Vector2(21f, 31f);
+        outerFlame.rectTransform.localRotation = Quaternion.Euler(0f, 0f, -35f);
+        outerFlame.raycastTarget = false;
+        Image innerFlame = CreateImage("FireCore", parent, RoundedSprite(), new Color(1f, 0.88f, 0.52f));
+        innerFlame.rectTransform.sizeDelta = new Vector2(10f, 17f);
+        innerFlame.rectTransform.anchoredPosition = new Vector2(1f, -4f);
+        innerFlame.rectTransform.localRotation = Quaternion.Euler(0f, 0f, -35f);
+        innerFlame.raycastTarget = false;
     }
 
     private Button AddButton(Transform parent, string name, string label, Vector2 anchorMin, Vector2 anchorMax, Color color, float fontSize, UnityEngine.Events.UnityAction onClick, Sprite sprite = null)
