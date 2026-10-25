@@ -4,7 +4,7 @@ Unity project for a city drone-piloting campaign.
 
 ## Open the project
 
-- Unity version: `6000.6.0f1`
+- Unity version: `6000.6.7f1`
 - Open this folder in Unity Hub.
 - Start from `Assets/Scenes/MainMenu.unity`; the campaign map and missions are in `Assets/Scenes/CampaignMap.unity`, `Assets/Scenes/lvl 1.unity`, and `Assets/Scenes/lvl2.unity`.
 
