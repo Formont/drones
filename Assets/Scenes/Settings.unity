@@ -2152,7 +2152,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168534597}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2164,7 +2164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -75, y: 87}
+  m_AnchoredPosition: {x: 672.96606, y: -175.79895}
   m_SizeDelta: {x: 727.15137, y: 514.6284}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1204010028
@@ -2404,7 +2404,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1410383938}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2414,8 +2414,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 115.09445, y: -53.62097}
-  m_SizeDelta: {x: 2150.189, y: 1187.242}
+  m_AnchoredPosition: {x: -632.8716, y: 209.17798}
+  m_SizeDelta: {x: 3646.121, y: 1712.8398}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1410383940
 MonoBehaviour:
@@ -3067,15 +3067,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!1660057539 &9223372036854775807
-SceneRoots:
-  m_ObjectHideFlags: 0
-  m_Roots:
-  - {fileID: 794348094}
-  - {fileID: 907182220}
-  - {fileID: 755311565}
-  - {fileID: 93560453}
-
 --- !u!114 &918347561225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3091,3 +3082,11 @@ MonoBehaviour:
   soundToggle: {fileID: 289961051}
   musicToggle: {fileID: 1977760890}
   difficultyDropdown: {fileID: 395518798}
+--- !u!1660057539 &9223372036854775807
+SceneRoots:
+  m_ObjectHideFlags: 0
+  m_Roots:
+  - {fileID: 794348094}
+  - {fileID: 907182220}
+  - {fileID: 755311565}
+  - {fileID: 93560453}
