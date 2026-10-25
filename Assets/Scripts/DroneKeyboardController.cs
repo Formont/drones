@@ -27,7 +27,6 @@ public sealed class DroneKeyboardController : MonoBehaviour
     [SerializeField, Min(0f)] private float fuelConsumptionPerSecond = 0.5f;
     [SerializeField] private bool motorsOnAtStart = true;
     [SerializeField] private AudioClip motorLoopClip;
-    [SerializeField, Min(0f)] private float propellerRotationSpeed = 1800f;
 
     private Vector3 currentVelocity;
     private float fuel;
@@ -37,7 +36,6 @@ public sealed class DroneKeyboardController : MonoBehaviour
     private bool cursorCaptured;
     private bool flightInputEnabled = true;
     private Animator[] propellerAnimators;
-    private Transform[] propellerTransforms;
     private GUIStyle hudBoxStyle;
     private GUIStyle hudTextStyle;
     private Vector3 boundsCenterPosition;
@@ -45,6 +43,8 @@ public sealed class DroneKeyboardController : MonoBehaviour
     private bool boundsFailureHandled;
     private bool showFallbackFailure;
     private AudioSource motorAudioSource;
+
+    public bool MotorsRunning => motorsOn && flightInputEnabled;
 
     private void Awake()
     {
@@ -73,7 +73,7 @@ public sealed class DroneKeyboardController : MonoBehaviour
         }
 
         FindPropellerAnimators();
-        UpdatePropellers(0f);
+        UpdatePropellers();
     }
 
     private void Start()
@@ -114,7 +114,7 @@ public sealed class DroneKeyboardController : MonoBehaviour
         }
 
         ApplyFlight(deltaTime);
-        UpdatePropellers(deltaTime);
+        UpdatePropellers();
         UpdateMotorAudio();
         CheckMissionBounds();
     }
@@ -266,27 +266,17 @@ public sealed class DroneKeyboardController : MonoBehaviour
         transform.position += movement;
     }
 
-    private void UpdatePropellers(float deltaTime)
+    private void UpdatePropellers()
     {
-        if (propellerAnimators != null)
-        {
-            foreach (Animator animator in propellerAnimators)
-            {
-                if (animator == null || !animator.gameObject.activeInHierarchy)
-                    continue;
-
-                animator.enabled = motorsOn;
-            }
-        }
-
-        if (!motorsOn || deltaTime <= 0f || propellerTransforms == null)
+        if (propellerAnimators == null)
             return;
 
-        float rotation = propellerRotationSpeed * deltaTime;
-        foreach (Transform propeller in propellerTransforms)
+        foreach (Animator animator in propellerAnimators)
         {
-            if (propeller != null && propeller.gameObject.activeInHierarchy)
-                propeller.localRotation *= Quaternion.AngleAxis(rotation, Vector3.forward);
+            if (animator == null || !animator.gameObject.activeInHierarchy)
+                continue;
+
+            animator.enabled = motorsOn;
         }
     }
 
@@ -294,7 +284,6 @@ public sealed class DroneKeyboardController : MonoBehaviour
     {
         Animator[] allAnimators = GetComponentsInChildren<Animator>(true);
         List<Animator> found = new List<Animator>();
-        List<Transform> propellers = new List<Transform>();
         foreach (Animator animator in allAnimators)
         {
             if (animator == null || animator.transform == transform)
@@ -309,19 +298,6 @@ public sealed class DroneKeyboardController : MonoBehaviour
         }
 
         propellerAnimators = found.ToArray();
-
-        foreach (Transform child in GetComponentsInChildren<Transform>(true))
-        {
-            if (child == transform) continue;
-            string objectName = child.name;
-            bool isPropeller = objectName.IndexOf("propeller", System.StringComparison.OrdinalIgnoreCase) >= 0
-                               || objectName.StartsWith("fan", System.StringComparison.OrdinalIgnoreCase)
-                               || objectName.IndexOf("rotor", System.StringComparison.OrdinalIgnoreCase) >= 0;
-            if (isPropeller && child.GetComponent<Animator>() == null)
-                propellers.Add(child);
-        }
-
-        propellerTransforms = propellers.ToArray();
     }
 
     private void SetCursorCaptured(bool captured)

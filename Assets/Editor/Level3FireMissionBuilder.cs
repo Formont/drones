@@ -60,6 +60,7 @@ public static class Level3FireMissionBuilder
             SerializedProperty motorClip = controllerData.FindProperty("motorLoopClip");
             if (motorClip != null) motorClip.objectReferenceValue = droneSound;
             controllerData.ApplyModifiedPropertiesWithoutUndo();
+            EnsureBumbleBeePropellerSpin(controller);
             EditorUtility.SetDirty(controller);
         }
 
@@ -161,6 +162,7 @@ public static class Level3FireMissionBuilder
         foreach (MonoBehaviour behaviour in playerDrone.GetComponentsInChildren<MonoBehaviour>(true))
             behaviour.enabled = false;
         DroneKeyboardController flight = playerDrone.AddComponent<DroneKeyboardController>();
+        EnsureBumbleBeePropellerSpin(flight);
         SerializedObject flightData = new SerializedObject(flight);
         Set(flightData, "maxHorizontalDistanceFromCity", 125f);
         Set(flightData, "maxAltitudeAboveCity", 55f);
@@ -367,6 +369,12 @@ public static class Level3FireMissionBuilder
         rect.anchoredPosition = position;
         rect.sizeDelta = size;
         EditorUtility.SetDirty(rect);
+    }
+
+    private static void EnsureBumbleBeePropellerSpin(DroneKeyboardController controller)
+    {
+        if (controller != null && controller.GetComponent<BumbleBeePropellerSpin>() == null)
+            controller.gameObject.AddComponent<BumbleBeePropellerSpin>();
     }
 
     private static GameObject CreateOverlay(string name, string title, Transform parent)
